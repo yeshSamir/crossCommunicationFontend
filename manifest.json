@@ -1,0 +1,8 @@
+{
+  "web_accessible_resources": [
+    {
+      "resources": ["contentScript.bundle.js"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}
