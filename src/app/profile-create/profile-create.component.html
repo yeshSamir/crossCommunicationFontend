@@ -1,0 +1,70 @@
+<div class="container">
+  <h2>Profile Create</h2>
+  <form (ngSubmit)="createProfile()" #profileForm="ngForm">
+    <div class="form-group">
+      <label for="firstName">First Name</label>
+      <input type="text" id="firstName" name="firstName" [(ngModel)]="profileDetails.firstName" required>
+    </div>
+
+    <div class="form-group">
+      <label for="lastName">Last Name</label>
+      <input type="text" id="lastName" name="lastName" [(ngModel)]="profileDetails.lastName" required>
+    </div>
+
+    <div class="form-group">
+      <label for="gender">Gender</label>
+      <select id="gender" name="gender" [(ngModel)]="profileDetails.gender" required>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+        <option value="Other">Other</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="countryName">Country Name</label>
+      <input type="text" id="countryName" name="countryName" [(ngModel)]="profileDetails.countryName" required>
+    </div>
+
+    <div class="form-group">
+      <label for="personalAddress">Personal Address</label>
+      <input type="text" id="personalAddress" name="personalAddress" [(ngModel)]="profileDetails.personalAddress" required>
+    </div>
+
+    <div class="form-group">
+      <label for="phoneNumber">Phone Number</label>
+      <input type="number" id="phoneNumber" name="phoneNumber" [(ngModel)]="profileDetails.phoneNumber" required>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" [(ngModel)]="profileDetails.email" required>
+    </div>
+
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" [(ngModel)]="profileDetails.password" required>
+    </div>
+
+    <div class="form-group">
+      <label for="securityQuestion">Security Question</label>
+      <input type="text" id="securityQuestion" name="securityQuestion" [(ngModel)]="profileDetails.securityQuestion">
+    </div>
+
+    <div class="form-group">
+      <label for="securityAnswer">Security Answer</label>
+      <input type="text" id="securityAnswer" name="securityAnswer" [(ngModel)]="profileDetails.securityAnswer" required>
+    </div>
+
+    <div class="form-group">
+      <label for="securityPin">Security Pin</label>
+      <input type="password" id="securityPin" name="securityPin" [(ngModel)]="profileDetails.securityPin" required>
+    </div>
+
+    <div class="form-group">
+      <label for="confirmSecurityPin">Confirm Security Pin</label>
+      <input type="password" id="confirmSecurityPin" name="confirmSecurityPin" [(ngModel)]="profileDetails.confirmSecurityPin" required>
+    </div>
+
+    <button type="submit" [disabled]="!profileForm.form.valid">Submit</button>
+  </form>
+</div>
