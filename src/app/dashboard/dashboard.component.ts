@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { trigger, transition, style, animate } from '@angular/animations';
 import {TicketService} from "../ticket-service.service";
 import {TicketDialogComponent} from "../ticket-dialog/ticket-dialog.component";
+import {TicketModel, TicketResponse} from "../../model/ticket.model";
 
 @Component({
   selector: 'app-dashboard',
@@ -21,7 +22,7 @@ import {TicketDialogComponent} from "../ticket-dialog/ticket-dialog.component";
   ],
 })
 export class DashboardComponent implements OnInit {
-  tickets: any[] = [];
+  ticketsLists: TicketModel[] = []; // or tickets: TicketResponse | null = null;
 
   constructor(private ticketService: TicketService, public dialog: MatDialog) {}
 
@@ -30,9 +31,19 @@ export class DashboardComponent implements OnInit {
   }
 
   loadTickets() {
-    // Fetch tickets from the backend
-    this.ticketService.getTickets().subscribe((data: any[]) => {
-      this.tickets = data;
+    this.ticketService.getTickets().subscribe({
+      next: (res) => {
+        console.log("Response back from Backend");
+        if(res.status) {
+          console.log("List getting tickets");
+          this.ticketsLists = res.ticketModelList;
+          console.log(this.ticketsLists);
+        }
+      },
+      error: (err) => {
+        console.error('Error creating profile:', err);
+        alert('Failed to Fetch tickets. Please try again.');
+      },
     });
   }
 
@@ -49,8 +60,8 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  viewTicketDetails(ticketId: string): void {
-    this.ticketService.getTicketDetails(ticketId).subscribe(
+  viewTicketDetails(ticketId: number | undefined): void {
+    this.ticketService.getTicketDetails(String(ticketId)).subscribe(
       (ticket) => {
         // Open a dialog or navigate to a detailed view
         console.log('Ticket Details:', ticket);

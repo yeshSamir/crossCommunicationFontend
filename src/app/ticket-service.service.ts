@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import { Observable } from 'rxjs';
-import {Ticket} from "../model/ticket.model";
+import {TicketResponse} from "../model/ticket.model";
 import {ResponseModel} from "../model/response.model";
 
 @Injectable({
@@ -12,13 +12,13 @@ export class TicketService {
 
   constructor(private http: HttpClient) {}
 
-  getTickets(): Observable<Ticket[]> {
-    return this.http.post<Ticket[]>(`${this.ticketBaseUrl}/fetchTickets`, null);
+  getTickets(): Observable<TicketResponse> {
+    return this.http.post<TicketResponse>(`${this.ticketBaseUrl}/fetchTickets`, null);
   }
   // Fetch related tickets based on ticket ID
   // Fetch ticket details by ID
-  getTicketDetails(ticketId: string): Observable<Ticket> {
-    return this.http.get<Ticket>(`${this.ticketBaseUrl}/${ticketId}`);
+  getTicketDetails(ticketId: string): Observable<TicketResponse> {
+    return this.http.get<TicketResponse>(`${this.ticketBaseUrl}/${ticketId}`);
   }
 
   // Create a new ticket

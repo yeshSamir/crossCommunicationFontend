@@ -2,17 +2,42 @@
   <h1>Ticket Management Dashboard</h1>
 
   <div class="action-buttons">
-    <button mat-raised-button color="primary" (click)="openCreateTicketDialog('SEND')">Create Send Ticket</button>
-    <button mat-raised-button color="accent" (click)="openCreateTicketDialog('RECEIVE')">Create Receive Ticket</button>
+    <button mat-raised-button color="primary" (click)="openCreateTicketDialog('SEND')">
+      <mat-icon>add_circle</mat-icon>
+      Create Send Ticket
+    </button>
+    <button mat-raised-button color="accent" (click)="openCreateTicketDialog('RECEIVE')">
+      <mat-icon>add_box</mat-icon>
+      Create Receive Ticket
+    </button>
   </div>
-
-  <h2>Your Tickets</h2>
-  <mat-list>
-    <mat-list-item *ngFor="let ticket of tickets" @fadeIn>
-      <div class="ticket-details">
-        <p>{{ ticket.productName }} - {{ ticket.ticketType }}</p>
-        <button mat-button color="warn" (click)="viewTicketDetails(ticket.id)">Find</button>
-      </div>
-    </mat-list-item>
-  </mat-list>
+  <table border="1">
+    <thead>
+    <tr>
+      <th>Ticket Type</th>
+      <th>Product Name</th>
+      <th>Size</th>
+      <th>Weight (kg)</th>
+      <th>Pickup Location</th>
+      <th>Delivery Location</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let ticket of ticketsLists">
+      <td>{{ ticket.ticketType }}</td>
+      <td>{{ ticket.productName }}</td>
+      <td>{{ ticket.productSize }}</td>
+      <td>{{ ticket.productWeight }}</td>
+      <td>{{ ticket.pickupLocation.city }}, {{ ticket.pickupLocation.state }}, {{ ticket.pickupLocation.country }}</td>
+      <td>{{ ticket.deliveryLocation.city }}, {{ ticket.deliveryLocation.state }}, {{ ticket.deliveryLocation.country }}</td>
+      <td>
+        <button (click)="viewTicketDetails(ticket.id)">Find</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <p *ngIf="!ticketsLists.length" class="empty-state">No tickets available</p>
 </div>
+
+

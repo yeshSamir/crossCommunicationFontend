@@ -1,29 +1,12 @@
 {
-  "manifest_version": 3,
-  "name": "My Extension",
-  "version": "1.0",
-  "description": "An example extension",
-  "permissions": [
-    "activeTab"
-  ],
-  "background": {
-    "service_worker": "background.js"
+  "name":"Off Screen Tabs Demo",
+  "description":"This demonstrates Off Screen Tabs API",
+  "manifest_version":2,
+  "version":"1",
+  "permissions":["tabs","<all_urls>"],
+  "browser_action":{
+    "default_icon":"screen.png",
+    "default_popup":"popup.html"
   },
-  "action": {
-    "default_popup": "popup.html"
-  },
-  "content_scripts": [
-    {
-      "matches": ["<all_urls>"],
-      "js": ["content.js"]
-    }
-  ],
-  "web_accessible_resources": [
-    {
-      "resources": [
-        "src/styles.css"
-      ],
-      "matches": ["<all_urls>"]
-    }
-  ]
+  "web_accessible_resources": ["js/LeoScript.js"]
 }

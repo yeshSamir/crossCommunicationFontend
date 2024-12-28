@@ -21,6 +21,9 @@ import {MatInputModule} from "@angular/material/input";
 import {MatOptionModule} from "@angular/material/core";
 import {MatSelectModule} from "@angular/material/select";
 import {MatDialogModule} from "@angular/material/dialog";
+import {MatIconModule} from "@angular/material/icon";
+import {MatCardModule} from "@angular/material/card";
+import {MatChipsModule} from "@angular/material/chips";
 
 const routes: Routes = [
   { path: '', component: ProfileCreateComponent },
@@ -45,14 +48,17 @@ const routes: Routes = [
     HttpClientModule,
     AppRoutingModule,
     RouterModule.forRoot(routes),
-    BrowserAnimationsModule,
-    MatListModule,
-    MatButtonModule,
     ReactiveFormsModule,
     MatInputModule,
     MatOptionModule,
     MatSelectModule,
     MatDialogModule,
+    MatChipsModule,
+    MatListModule,
+    MatButtonModule,
+    MatIconModule,
+    MatCardModule,
+    BrowserAnimationsModule
   ],
   providers: [
     {

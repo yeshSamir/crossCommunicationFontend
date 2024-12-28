@@ -2,7 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { trigger, transition, style, animate } from '@angular/animations';
-import {Ticket} from "../../model/ticket.model";
+import { TicketModel, TicketResponse} from "../../model/ticket.model";
 import {TicketService} from "../ticket-service.service";
 
 @Component({
@@ -19,7 +19,8 @@ import {TicketService} from "../ticket-service.service";
   ],
 })
 export class TicketListComponent implements OnInit {
-  tickets: Ticket[] = [];
+  loading: boolean = false;
+  tickets: TicketModel[] = [];
 
   constructor(private ticketService: TicketService, private dialog: MatDialog) {}
 
@@ -29,28 +30,44 @@ export class TicketListComponent implements OnInit {
 
   // Fetch the list of tickets
   fetchTickets(): void {
-    this.ticketService.getTickets().subscribe(
-      (data) => {
-        this.tickets = data;
+    this.loading = true; // Optional: add loading state
+    this.ticketService.getTickets().subscribe({
+      next: (response: TicketResponse) => {
+        if (response.status) {
+          this.tickets = response.ticketModelList;
+        } else {
+          console.error('Error in response:', response.responseMessage);
+        }
       },
-      (error) => {
-        console.error('Error fetching tickets', error);
+      error: (error) => {
+        console.error('Error fetching tickets:', error);
+      },
+      complete: () => {
+        this.loading = false; // Optional: remove loading state
       }
-    );
+    });
   }
 
   // View ticket details
   viewTicketDetails(ticketId: string): void {
-    this.ticketService.getTicketDetails(ticketId).subscribe(
-      (ticket) => {
-        // Open a dialog or navigate to a detailed view
-        console.log('Ticket Details:', ticket);
-        // Optionally, open a dialog to show ticket details
-        // this.dialog.open(TicketDetailsDialogComponent, { data: ticket });
+    this.loading = true;
+    this.ticketService.getTicketDetails(ticketId).subscribe({
+      next: (response: TicketResponse) => {
+        if (response.status && response.ticketModelList.length > 0) {
+          const ticket = response.ticketModelList[0];
+          console.log('Ticket Details:', ticket);
+          // If you want to open a dialog:
+          // this.dialog.open(TicketDetailsDialogComponent, { data: ticket });
+        } else {
+          console.error('Ticket not found or error:', response.responseMessage);
+        }
       },
-      (error) => {
-        console.error('Error fetching ticket details', error);
+      error: (error) => {
+        console.error('Error fetching ticket details:', error);
+      },
+      complete: () => {
+        this.loading = false;
       }
-    );
+    });
   }
 }
