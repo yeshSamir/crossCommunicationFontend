@@ -1,1 +1,18 @@
-<p>dashboard works!</p>
+<div class="dashboard-container">
+  <h1>Ticket Management Dashboard</h1>
+
+  <div class="action-buttons">
+    <button mat-raised-button color="primary" (click)="openCreateTicketDialog('SEND')">Create Send Ticket</button>
+    <button mat-raised-button color="accent" (click)="openCreateTicketDialog('RECEIVE')">Create Receive Ticket</button>
+  </div>
+
+  <h2>Your Tickets</h2>
+  <mat-list>
+    <mat-list-item *ngFor="let ticket of tickets" @fadeIn>
+      <div class="ticket-details">
+        <p>{{ ticket.productName }} - {{ ticket.ticketType }}</p>
+        <button mat-button color="warn" (click)="viewTicketDetails(ticket.id)">Find</button>
+      </div>
+    </mat-list-item>
+  </mat-list>
+</div>

@@ -27,7 +27,8 @@ export class LoginComponent {
     this.profileService.login(this.loginRequestModel).subscribe({
       next: (response) => {
         if (response.status && response.responseCode === 200) {
-          sessionStorage.setItem('authToken',String(response.token)); // Store token
+          // Store token in sessionStorage (expires when session ends)
+          sessionStorage.setItem('authToken', String(response.token));
           this.router.navigate(['/dashboard']); // Redirect to dashboard or another page
         } else {
           alert('Invalid username or password. Please try again.');

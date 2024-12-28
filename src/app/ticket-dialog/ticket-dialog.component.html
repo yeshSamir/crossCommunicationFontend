@@ -1,0 +1,46 @@
+<h2 mat-dialog-title>Create {{ data.ticketType }} Ticket</h2>
+<form [formGroup]="ticketForm" (ngSubmit)="submitTicket()">
+  <mat-form-field appearance="fill">
+    <mat-label>Product Name</mat-label>
+    <input matInput formControlName="productName" />
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Product Size</mat-label>
+    <mat-select formControlName="productSize">
+      <mat-option value="Small">Small</mat-option>
+      <mat-option value="Medium">Medium</mat-option>
+      <mat-option value="Large">Large</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Product Weight</mat-label>
+    <input matInput type="number" formControlName="productWeight" />
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Security Pin</mat-label>
+    <input matInput type="number" formControlName="securityPin" />
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Pickup Location</mat-label>
+    <input matInput formControlName="pickupLocation" />
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Delivery Location</mat-label>
+    <input matInput formControlName="deliveryLocation" />
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Notes</mat-label>
+    <textarea matInput formControlName="notes"></textarea>
+  </mat-form-field>
+
+  <div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Cancel</button>
+    <button mat-raised-button color="primary" type="submit" [disabled]="!ticketForm.valid">Submit</button>
+  </div>
+</form>

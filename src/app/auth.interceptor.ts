@@ -14,7 +14,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
   private excludedUrls: string[] = [
     'http://localhost:8082/profile', // Exclude this base URL
-    'http://localhost:8082/auth',    // Exclude this base URL
+    'http://localhost:8082/auth',
   ];
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -31,6 +31,7 @@ export class AuthInterceptor implements HttpInterceptor {
       const clonedReq = req.clone({
         setHeaders: {
           Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
         },
       });
       return next.handle(clonedReq);

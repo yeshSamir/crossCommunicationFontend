@@ -1,0 +1,25 @@
+.dashboard-container {
+  padding: 20px;
+  max-width: 800px;
+  margin: auto;
+  text-align: center;
+}
+
+.action-buttons {
+  margin: 20px 0;
+}
+
+.action-buttons button {
+  margin: 0 10px;
+}
+
+.ticket-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+mat-list-item {
+  border-bottom: 1px solid #ccc;
+  padding: 10px 0;
+}
