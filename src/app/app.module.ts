@@ -24,6 +24,8 @@ import {MatDialogModule} from "@angular/material/dialog";
 import {MatIconModule} from "@angular/material/icon";
 import {MatCardModule} from "@angular/material/card";
 import {MatChipsModule} from "@angular/material/chips";
+import {JWT_OPTIONS, JwtHelperService} from "@auth0/angular-jwt";
+import {AuthService} from "./auth.service";
 
 const routes: Routes = [
   { path: '', component: ProfileCreateComponent },
@@ -66,6 +68,9 @@ const routes: Routes = [
       useClass: AuthInterceptor,
       multi: true,
     },
+    { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
+    JwtHelperService,
+    AuthService
   ],
   bootstrap: [AppComponent],
 })

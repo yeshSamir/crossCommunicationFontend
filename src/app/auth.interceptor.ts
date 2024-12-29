@@ -3,14 +3,21 @@ import {
   HttpRequest,
   HttpHandler,
   HttpEvent,
-  HttpInterceptor
+  HttpInterceptor, HttpErrorResponse
 } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
+import {catchError, Observable, throwError} from 'rxjs';
+import {AuthService} from "./auth.service";
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthInterceptor implements HttpInterceptor {
+
+  constructor(
+    private router: Router,
+    private authService: AuthService
+  ) {}
 
   private excludedUrls: string[] = [
     'http://localhost:8082/profile', // Exclude this base URL
@@ -36,6 +43,15 @@ export class AuthInterceptor implements HttpInterceptor {
       });
       return next.handle(clonedReq);
     }
-    return next.handle(req);
+    return next.handle(req).pipe(
+      catchError((error: HttpErrorResponse) => {
+        if (error.status === 401) {
+          // Token expired or invalid
+          this.authService.logout();
+          this.router.navigate(['/login']);
+        }
+        return throwError(() => error);
+      })
+    );
   }
 }
