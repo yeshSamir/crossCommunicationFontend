@@ -40,7 +40,7 @@ const routes: Routes = [
     DashboardComponent,
     CreateTicketComponent,
     TicketListComponent,
-    TicketDialogComponent,
+    TicketDialogComponent
   ],
   imports: [
     BrowserModule,

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import { Observable } from 'rxjs';
 import {TicketResponse} from "../model/ticket.model";
-import {ResponseModel} from "../model/response.model";
+
 
 @Injectable({
   providedIn: 'root',
@@ -15,6 +15,7 @@ export class TicketService {
   getTickets(): Observable<TicketResponse> {
     return this.http.post<TicketResponse>(`${this.ticketBaseUrl}/fetchTickets`, null);
   }
+
   // Fetch related tickets based on ticket ID
   // Fetch ticket details by ID
   getTicketDetails(ticketId: string): Observable<TicketResponse> {

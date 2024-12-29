@@ -1,46 +1,76 @@
-<h2 mat-dialog-title>Create {{ data.ticketType }} Ticket</h2>
-<form [formGroup]="ticketForm" (ngSubmit)="submitTicket()">
-  <mat-form-field appearance="fill">
-    <mat-label>Product Name</mat-label>
-    <input matInput formControlName="productName" />
-  </mat-form-field>
+<div class="create-ticket-container" [@dialogAnimation]>
+  <h2>Create {{ ticketType }} Ticket</h2>
 
-  <mat-form-field appearance="fill">
-    <mat-label>Product Size</mat-label>
-    <mat-select formControlName="productSize">
-      <mat-option value="Small">Small</mat-option>
-      <mat-option value="Medium">Medium</mat-option>
-      <mat-option value="Large">Large</mat-option>
-    </mat-select>
-  </mat-form-field>
+  <form [formGroup]="locationForm">
+    <mat-form-field appearance="fill">
+      <mat-label>Product Name</mat-label>
+      <input matInput formControlName="productName" />
+    </mat-form-field>
 
-  <mat-form-field appearance="fill">
-    <mat-label>Product Weight</mat-label>
-    <input matInput type="number" formControlName="productWeight" />
-  </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Product Size</mat-label>
+      <mat-select formControlName="productSize">
+        <mat-option value="Small">Small</mat-option>
+        <mat-option value="Medium">Medium</mat-option>
+        <mat-option value="Large">Large</mat-option>
+      </mat-select>
+    </mat-form-field>
 
-  <mat-form-field appearance="fill">
-    <mat-label>Security Pin</mat-label>
-    <input matInput type="number" formControlName="securityPin" />
-  </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Product Weight</mat-label>
+      <input matInput type="number" formControlName="productWeight" />
+    </mat-form-field>
 
-  <mat-form-field appearance="fill">
-    <mat-label>Pickup Location</mat-label>
-    <input matInput formControlName="pickupLocation" />
-  </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Pickup Country</mat-label>
+      <mat-select formControlName="pickupCountry" (selectionChange)="onCountryChange('pickup')">
+        <mat-option *ngIf="!countryLists || countryLists.length === 0" [value]="null" disabled>Select an option</mat-option>
+        <mat-option *ngFor="let country of countryLists" [value]="country.id">{{ country.name }}</mat-option>
+      </mat-select>
+    </mat-form-field>
 
-  <mat-form-field appearance="fill">
-    <mat-label>Delivery Location</mat-label>
-    <input matInput formControlName="deliveryLocation" />
-  </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Pickup State</mat-label>
+      <mat-select formControlName="pickupState" (selectionChange)="onStateChange('pickup')">
+        <mat-option *ngIf="!pickUpStateLists || pickUpStateLists.length === 0" [value]="null" disabled>Select an option</mat-option>
+        <mat-option *ngFor="let state of pickUpStateLists" [value]="state.id">{{ state.name }}</mat-option>
+      </mat-select>
+    </mat-form-field>
 
-  <mat-form-field appearance="fill">
-    <mat-label>Notes</mat-label>
-    <textarea matInput formControlName="notes"></textarea>
-  </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Pickup City</mat-label>
+      <mat-select formControlName="pickupCity">
+        <mat-option *ngIf="!pickUpCitiesLists || pickUpCitiesLists.length === 0" [value]="null" disabled>Select an option</mat-option>
+        <mat-option *ngFor="let city of pickUpCitiesLists" [value]="city.id">{{ city.name }}</mat-option>
+      </mat-select>
+    </mat-form-field>
 
-  <div mat-dialog-actions>
-    <button mat-button (click)="onNoClick()">Cancel</button>
-    <button mat-raised-button color="primary" type="submit" [disabled]="!ticketForm.valid">Submit</button>
-  </div>
-</form>
+    <!-- Delivery Location -->
+    <mat-form-field appearance="fill">
+      <mat-label>Delivery Country</mat-label>
+      <mat-select formControlName="deliveryCountry" (selectionChange)="onCountryChange('delivery')">
+        <mat-option *ngIf="!countryLists || countryLists.length === 0" [value]="null" disabled>Select an option</mat-option>
+        <mat-option *ngFor="let country of countryLists" [value]="country.id">{{ country.name }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Delivery State</mat-label>
+      <mat-select formControlName="deliveryState" (selectionChange)="onStateChange('delivery')">
+        <mat-option *ngIf="!deliveryStateLists || deliveryStateLists.length === 0" [value]="null" disabled>Select an option</mat-option>
+        <mat-option *ngFor="let state of deliveryStateLists" [value]="state.id">{{ state.name }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Delivery City</mat-label>
+      <mat-select formControlName="deliveryCity">
+        <mat-option *ngIf="!deliveryCitiesLists || deliveryCitiesLists.length === 0" [value]="null" disabled>Select an option</mat-option>
+        <mat-option *ngFor="let city of deliveryCitiesLists" [value]="city.id">{{ city.name }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" (click)="submitTicket()">Submit</button>
+    <button mat-raised-button color="warn" (click)="closeDialog()">Cancel</button>
+  </form>
+</div>

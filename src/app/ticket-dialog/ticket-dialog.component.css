@@ -1,0 +1,20 @@
+.create-ticket-container {
+  padding: 15px; /* Reduce padding for compactness */
+  width: 80%; /* Allow it to fit smaller screens */
+  max-width: 600px; /* Reduce maximum width */
+  max-height: 500px; /* Limit height */
+  overflow-y: auto; /* Add scroll if content exceeds height */
+  margin: auto;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+mat-form-field {
+  width: 100%;
+  margin-bottom: 10px; /* Further reduce spacing */
+}
+
+button {
+  margin: 5px; /* Reduce button spacing */
+}
