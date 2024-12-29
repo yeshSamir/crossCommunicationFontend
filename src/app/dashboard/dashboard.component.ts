@@ -50,12 +50,13 @@ export class DashboardComponent implements OnInit {
   openCreateTicketDialog(ticketType: string) {
     const dialogRef = this.dialog.open(TicketDialogComponent, {
       width: '400px',
-      data: { ticketType },
+      data: { ticketType: ticketType }, // Pass 'Send' or 'Receive'
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.loadTickets(); // Reload tickets after creating a new one
+        console.log("Create ticket");
+        this.loadTickets();
       }
     });
   }

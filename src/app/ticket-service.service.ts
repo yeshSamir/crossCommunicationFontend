@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import { Observable } from 'rxjs';
 import {TicketResponse} from "../model/ticket.model";
+import {ResponseModel} from "../model/response.model";
 
 
 @Injectable({
@@ -23,7 +24,8 @@ export class TicketService {
   }
 
   // Create a new ticket
-  createTicket(ticketData: any): Observable<any> {
-    return this.http.post<any>(`${this.ticketBaseUrl}/create`, ticketData);
+  submitTicket(ticketData: any): Observable<ResponseModel> {
+    return this.http.post<ResponseModel>(`${this.ticketBaseUrl}/create`, ticketData);
   }
+
 }

@@ -70,6 +70,18 @@
       </mat-select>
     </mat-form-field>
 
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Notes</mat-label>
+      <textarea
+        matInput
+        formControlName="notes"
+        placeholder="Add any additional information or special instructions"
+        rows="4"
+        #notesInput
+      ></textarea>
+      <mat-hint align="end">{{notesInput.value.length || 0}}/500</mat-hint>
+    </mat-form-field>
+
     <button mat-raised-button color="primary" (click)="submitTicket()">Submit</button>
     <button mat-raised-button color="warn" (click)="closeDialog()">Cancel</button>
   </form>
