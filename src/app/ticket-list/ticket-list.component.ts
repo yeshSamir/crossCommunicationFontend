@@ -51,7 +51,7 @@ export class TicketListComponent implements OnInit {
   // View ticket details
   viewTicketDetails(ticketId: string): void {
     this.loading = true;
-    this.ticketService.getTicketDetails(ticketId).subscribe({
+    /*this.ticketService.getTicketDetails(ticketId).subscribe({
       next: (response: TicketResponse) => {
         if (response.status && response.ticketModelList.length > 0) {
           const ticket = response.ticketModelList[0];
@@ -68,6 +68,6 @@ export class TicketListComponent implements OnInit {
       complete: () => {
         this.loading = false;
       }
-    });
+    });*/
   }
 }

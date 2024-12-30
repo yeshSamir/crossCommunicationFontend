@@ -11,6 +11,15 @@
       Create Receive Ticket
     </button>
   </div>
+
+  <!-- Back to Ticket List Button -->
+  <div class="back-to-list" *ngIf="!isCheck">
+    <button mat-raised-button color="warn" (click)="goBackToTicketList()">
+      <mat-icon>arrow_back</mat-icon>
+      Back to Ticket List
+    </button>
+  </div>
+
   <table border="1">
     <thead>
     <tr>
@@ -20,11 +29,11 @@
       <th>Weight (kg)</th>
       <th>Pickup Location</th>
       <th>Delivery Location</th>
-      <th>Actions</th>
+      <th *ngIf="isCheck">Actions</th>
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let ticket of ticketsLists">
+    <tr *ngFor="let ticket of (isCheck ? ticketsLists : suggestedTicketsLists)">
       <td>{{ ticket.ticketType }}</td>
       <td>{{ ticket.productName }}</td>
       <td>{{ ticket.productSize }}</td>
@@ -32,12 +41,28 @@
       <td>{{ ticket.pickupLocation.city }}, {{ ticket.pickupLocation.state }}, {{ ticket.pickupLocation.country }}</td>
       <td>{{ ticket.deliveryLocation.city }}, {{ ticket.deliveryLocation.state }}, {{ ticket.deliveryLocation.country }}</td>
       <td>
-        <button (click)="viewTicketDetails(ticket.id)">Find</button>
+        <button *ngIf="isCheck" (click)="openPopup(ticket.id)">Find</button>
+        <button *ngIf="!isCheck" (click)="startChat(ticket.id)">Chat</button>
       </td>
     </tr>
     </tbody>
   </table>
-  <p *ngIf="!ticketsLists.length" class="empty-state">No tickets available</p>
+
+  <p *ngIf="!ticketsLists.length && isCheck" class="empty-state">No tickets available</p>
+  <p *ngIf="!suggestedTicketsLists.length && !isCheck" class="empty-state">No suggested tickets available</p>
+
+  <!-- Popup Modal -->
+  <div class="popup-modal" *ngIf="isPopupOpen">
+    <div class="popup-content">
+      <h3>Enter Radius Details</h3>
+      <label for="pickupRadius">Pickup Location Radius (Mile):</label>
+      <input type="number" id="pickupRadius" [(ngModel)]="pickupRadius" />
+      <label for="deliveryRadius">Delivery Location Radius (Mile):</label>
+      <input type="number" id="deliveryRadius" [(ngModel)]="deliveryRadius" />
+      <div class="popup-actions">
+        <button (click)="sendRadius()">Send</button>
+        <button (click)="closePopup()">Cancel</button>
+      </div>
+    </div>
+  </div>
 </div>
-
-
