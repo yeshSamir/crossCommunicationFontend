@@ -5,6 +5,7 @@ import {TicketService} from "../ticket-service.service";
 import {TicketDialogComponent} from "../ticket-dialog/ticket-dialog.component";
 import {TicketModel, TicketResponse} from "../../model/ticket.model";
 import {FetchTicketsRequestModule} from "../../model/fetchSuggestedTicketsRequestModule.module";
+import {ContactDetailsModel} from "../../model/contactDetails.model";
 
 @Component({
   selector: 'app-dashboard',
@@ -25,7 +26,9 @@ import {FetchTicketsRequestModule} from "../../model/fetchSuggestedTicketsReques
 export class DashboardComponent implements OnInit {
   fetchSuggestedTickets: FetchTicketsRequestModule = new FetchTicketsRequestModule();
   ticketsLists: TicketModel[] = []; // or tickets: TicketResponse | null = null;
-  suggestedTicketsLists: TicketModel[] = []; // or tickets: TicketResponse | null = null;
+  suggestedTicketsLists: TicketModel[] = [];
+  // or tickets: TicketResponse | null = null;
+  contactDetailsModel: ContactDetailsModel = new ContactDetailsModel();
 
   isCheck: boolean = true; // Controls which list to display
   isPopupOpen = false; // Controls popup visibility
@@ -124,4 +127,22 @@ export class DashboardComponent implements OnInit {
     console.log('Sample message: "Hello! How can we assist you with this ticket?"');
   }
 
+  requestContactInformation(ticketId: number | undefined): void {
+    console.log(`Starting Requesting Contact Details for ticket ID: ${ticketId}`);
+    console.log('Name: Samir Nepal, mobile:5096015874"');
+      this.ticketService.requestContactDetailsFromSuggestedListId(ticketId).subscribe({
+        next: (res) => {
+          if (res.status) {
+           this.contactDetailsModel = res
+            console.log(this.contactDetailsModel)
+            alert(res.responseMessage)
+          }
+        },
+        error: (err) => {
+          console.error('Error Requesting Contact:', err);
+          alert('Failed to Requesting Contact. Please try again.');
+        },
+      });
+
+  }
 }

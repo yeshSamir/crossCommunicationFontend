@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import {TicketResponse} from "../model/ticket.model";
 import {ResponseModel} from "../model/response.model";
 import {FetchTicketsRequestModule} from "../model/fetchSuggestedTicketsRequestModule.module";
+import {LocationResponse} from "../model/location.module";
+import {ContactDetailsModel} from "../model/contactDetails.model";
 
 
 @Injectable({
@@ -30,6 +32,9 @@ export class TicketService {
     return this.http.post<TicketResponse>(`${this.ticketBaseUrl}/fetchTicketsById`, fetchTicketsRequestModule);
   }
 
-
-
+  requestContactDetailsFromSuggestedListId(suggestedTicketId: number | undefined): Observable<ContactDetailsModel> {
+    return this.http.post<ContactDetailsModel>(`${this.ticketBaseUrl}/requestContactDetailsFromSuggestedListId`, {
+      params: { suggestedTicketId }
+    });
+  }
 }

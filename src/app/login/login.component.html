@@ -1,3 +1,4 @@
+<!--
 <div class="login-container">
   <h2>Login</h2>
   <form (ngSubmit)="onLogin()">
@@ -14,6 +15,52 @@
 
   <div class="additional-options">
     <a (click)="navigateToCreateProfile()" class="create-profile-link">Create Profile</a>
+    <a href="#" class="forgot-password-link">Forgot Password?</a>
+  </div>
+</div>
+-->
+<div class="background-animation"></div>
+
+<div class="login-container">
+  <div class="logo-container">
+    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="100" cy="100" r="90" fill="#2D3436"/>
+      <path d="M60 140 L100 40 L140 140" stroke="#00CEC9" stroke-width="12" fill="none"/>
+      <line x1="75" y1="100" x2="125" y2="100" stroke="#00CEC9" stroke-width="12"/>
+      <path d="M85 70 C85 70, 115 70, 115 90 C115 110, 85 110, 85 130 C85 150, 115 150, 115 150"
+            stroke="#FD79A8" stroke-width="12" fill="none" transform="translate(0, -10)"/>
+    </svg>
+  </div>
+
+  <h2>Welcome Back</h2>
+  <form (ngSubmit)="onLogin()">
+    <div class="form-group">
+      <label for="username">Username or Phone Number</label>
+      <input
+        type="text"
+        id="username"
+        [(ngModel)]="username"
+        name="username"
+        placeholder="Enter your username"
+        required
+      />
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input
+        type="password"
+        id="password"
+        [(ngModel)]="password"
+        name="password"
+        placeholder="Enter your password"
+        required
+      />
+    </div>
+    <button type="submit">Sign In</button>
+  </form>
+
+  <div class="additional-options">
+    <a (click)="navigateToCreateProfile()" class="create-profile-link">Create New Account</a>
     <a href="#" class="forgot-password-link">Forgot Password?</a>
   </div>
 </div>

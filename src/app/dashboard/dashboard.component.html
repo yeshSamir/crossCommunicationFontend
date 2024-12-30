@@ -42,7 +42,11 @@
       <td>{{ ticket.deliveryLocation.city }}, {{ ticket.deliveryLocation.state }}, {{ ticket.deliveryLocation.country }}</td>
       <td>
         <button *ngIf="isCheck" (click)="openPopup(ticket.id)">Find</button>
-        <button *ngIf="!isCheck" (click)="startChat(ticket.id)">Chat</button>
+        <!-- Chat System Will be done in future -->
+        <!--<button *ngIf="!isCheck" (click)="startChat(ticket.id)">Chat</button> -->
+      </td>
+      <td *ngIf="!isCheck">
+        <button (click)="requestContactInformation(ticket.id)">Request Contact Details</button>
       </td>
     </tr>
     </tbody>

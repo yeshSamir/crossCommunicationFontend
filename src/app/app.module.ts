@@ -12,8 +12,6 @@ import {AppRoutingModule} from "./app-routing.module";
 import { DashboardComponent } from './dashboard/dashboard.component';
 import {AuthInterceptor} from "./auth.interceptor";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { CreateTicketComponent } from './create-ticket/create-ticket.component';
-import { TicketListComponent } from './ticket-list/ticket-list.component';
 import { TicketDialogComponent } from './ticket-dialog/ticket-dialog.component';
 import {MatListModule} from "@angular/material/list";
 import {MatButtonModule} from "@angular/material/button";
@@ -40,8 +38,6 @@ const routes: Routes = [
     LoginComponent,
     ForgotPasswordComponent,
     DashboardComponent,
-    CreateTicketComponent,
-    TicketListComponent,
     TicketDialogComponent
   ],
   imports: [
