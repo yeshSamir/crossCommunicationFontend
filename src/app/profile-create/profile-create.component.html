@@ -1,19 +1,32 @@
-<div class="container">
-  <h2>Profile Create</h2>
+<div class="background-animation"></div>
+
+<div class="profile-container">
+  <div class="logo-container">
+    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="100" cy="100" r="90" fill="#2D3436"/>
+      <path d="M60 140 L100 40 L140 140" stroke="#00CEC9" stroke-width="12" fill="none"/>
+      <line x1="75" y1="100" x2="125" y2="100" stroke="#00CEC9" stroke-width="12"/>
+      <path d="M85 70 C85 70, 115 70, 115 90 C115 110, 85 110, 85 130 C85 150, 115 150, 115 150"
+            stroke="#FD79A8" stroke-width="12" fill="none" transform="translate(0, -10)"/>
+    </svg>
+  </div>
+
+  <h2>Create Your Profile</h2>
   <form (ngSubmit)="createProfile()" #profileForm="ngForm">
     <div class="form-group">
       <label for="firstName">First Name</label>
-      <input type="text" id="firstName" name="firstName" [(ngModel)]="profileDetails.firstName" required>
+      <input type="text" id="firstName" name="firstName" [(ngModel)]="profileDetails.firstName" required placeholder="Enter your first name">
     </div>
 
     <div class="form-group">
       <label for="lastName">Last Name</label>
-      <input type="text" id="lastName" name="lastName" [(ngModel)]="profileDetails.lastName" required>
+      <input type="text" id="lastName" name="lastName" [(ngModel)]="profileDetails.lastName" required placeholder="Enter your last name">
     </div>
 
     <div class="form-group">
       <label for="gender">Gender</label>
       <select id="gender" name="gender" [(ngModel)]="profileDetails.gender" required>
+        <option value="" disabled selected>Select your gender</option>
         <option value="Male">Male</option>
         <option value="Female">Female</option>
         <option value="Other">Other</option>
@@ -22,49 +35,49 @@
 
     <div class="form-group">
       <label for="countryName">Country Name</label>
-      <input type="text" id="countryName" name="countryName" [(ngModel)]="profileDetails.countryName" required>
+      <input type="text" id="countryName" name="countryName" [(ngModel)]="profileDetails.countryName" required placeholder="Enter your country">
     </div>
 
     <div class="form-group">
       <label for="personalAddress">Personal Address</label>
-      <input type="text" id="personalAddress" name="personalAddress" [(ngModel)]="profileDetails.personalAddress" required>
+      <input type="text" id="personalAddress" name="personalAddress" [(ngModel)]="profileDetails.personalAddress" required placeholder="Enter your address">
     </div>
 
     <div class="form-group">
       <label for="phoneNumber">Phone Number</label>
-      <input type="number" id="phoneNumber" name="phoneNumber" [(ngModel)]="profileDetails.phoneNumber" required>
+      <input type="tel" id="phoneNumber" name="phoneNumber" [(ngModel)]="profileDetails.phoneNumber" required placeholder="Enter your phone number">
     </div>
 
     <div class="form-group">
       <label for="email">Email</label>
-      <input type="email" id="email" name="email" [(ngModel)]="profileDetails.email" required>
+      <input type="email" id="email" name="email" [(ngModel)]="profileDetails.email" required placeholder="Enter your email">
     </div>
 
     <div class="form-group">
       <label for="password">Password</label>
-      <input type="password" id="password" name="password" [(ngModel)]="profileDetails.password" required>
+      <input type="password" id="password" name="password" [(ngModel)]="profileDetails.password" required placeholder="Enter your password">
     </div>
 
     <div class="form-group">
       <label for="securityQuestion">Security Question</label>
-      <input type="text" id="securityQuestion" name="securityQuestion" [(ngModel)]="profileDetails.securityQuestion">
+      <input type="text" id="securityQuestion" name="securityQuestion" [(ngModel)]="profileDetails.securityQuestion" placeholder="Enter security question">
     </div>
 
     <div class="form-group">
       <label for="securityAnswer">Security Answer</label>
-      <input type="text" id="securityAnswer" name="securityAnswer" [(ngModel)]="profileDetails.securityAnswer" required>
+      <input type="text" id="securityAnswer" name="securityAnswer" [(ngModel)]="profileDetails.securityAnswer" required placeholder="Enter security answer">
     </div>
 
     <div class="form-group">
       <label for="securityPin">Security Pin</label>
-      <input type="password" id="securityPin" name="securityPin" [(ngModel)]="profileDetails.securityPin" required>
+      <input type="password" id="securityPin" name="securityPin" [(ngModel)]="profileDetails.securityPin" required placeholder="Enter security pin">
     </div>
 
     <div class="form-group">
       <label for="confirmSecurityPin">Confirm Security Pin</label>
-      <input type="password" id="confirmSecurityPin" name="confirmSecurityPin" [(ngModel)]="profileDetails.confirmSecurityPin" required>
+      <input type="password" id="confirmSecurityPin" name="confirmSecurityPin" [(ngModel)]="profileDetails.confirmSecurityPin" required placeholder="Confirm security pin">
     </div>
 
-    <button type="submit" [disabled]="!profileForm.form.valid">Submit</button>
+    <button type="submit" [disabled]="!profileForm.form.valid">Create Profile</button>
   </form>
 </div>

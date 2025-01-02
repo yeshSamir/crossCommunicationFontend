@@ -1,10 +1,22 @@
+<div class="background-animation"></div>
+
 <div class="otp-container">
+  <div class="logo-container">
+    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="100" cy="100" r="90" fill="#2D3436"/>
+      <path d="M60 140 L100 40 L140 140" stroke="#00CEC9" stroke-width="12" fill="none"/>
+      <line x1="75" y1="100" x2="125" y2="100" stroke="#00CEC9" stroke-width="12"/>
+      <path d="M85 70 C85 70, 115 70, 115 90 C115 110, 85 110, 85 130 C85 150, 115 150, 115 150"
+            stroke="#FD79A8" stroke-width="12" fill="none" transform="translate(0, -10)"/>
+    </svg>
+  </div>
+
   <h2>Enter OTP</h2>
   <p class="response-message" *ngIf="responseMessage">{{ responseMessage }}</p>
 
   <form (ngSubmit)="verifyOtp()" class="otp-form">
     <div class="form-group">
-      <label for="otp">OTP</label>
+      <label for="otp">Enter Verification Code</label>
       <input
         type="text"
         id="otp"
@@ -20,7 +32,7 @@
   </form>
 
   <div class="resend-container">
-    <p>Didn’t receive the OTP?</p>
+    <p>Didn't receive the code?</p>
     <button (click)="resendOtp()" class="resend-btn">Resend OTP</button>
   </div>
 </div>

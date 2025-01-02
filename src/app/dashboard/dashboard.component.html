@@ -1,56 +1,67 @@
+<div class="background-animation"></div>
+
 <div class="dashboard-container">
+  <div class="logo-container">
+    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="100" cy="100" r="90" fill="#2D3436"/>
+      <path d="M60 140 L100 40 L140 140" stroke="#00CEC9" stroke-width="12" fill="none"/>
+      <line x1="75" y1="100" x2="125" y2="100" stroke="#00CEC9" stroke-width="12"/>
+      <path d="M85 70 C85 70, 115 70, 115 90 C115 110, 85 110, 85 130 C85 150, 115 150, 115 150"
+            stroke="#FD79A8" stroke-width="12" fill="none" transform="translate(0, -10)"/>
+    </svg>
+  </div>
+
   <h1>Ticket Management Dashboard</h1>
 
   <div class="action-buttons">
-    <button mat-raised-button color="primary" (click)="openCreateTicketDialog('Send')">
+    <button mat-raised-button color="primary" (click)="openCreateTicketDialog('Send')" class="create-button">
       <mat-icon>add_circle</mat-icon>
       Create Send Ticket
     </button>
-    <button mat-raised-button color="accent" (click)="openCreateTicketDialog('Receive')">
+    <button mat-raised-button color="accent" (click)="openCreateTicketDialog('Receive')" class="create-button">
       <mat-icon>add_box</mat-icon>
       Create Receive Ticket
     </button>
   </div>
 
-  <!-- Back to Ticket List Button -->
   <div class="back-to-list" *ngIf="!isCheck">
-    <button mat-raised-button color="warn" (click)="goBackToTicketList()">
+    <button mat-raised-button color="warn" (click)="goBackToTicketList()" class="back-button">
       <mat-icon>arrow_back</mat-icon>
       Back to Ticket List
     </button>
   </div>
 
-  <table border="1">
-    <thead>
-    <tr>
-      <th>Ticket Type</th>
-      <th>Product Name</th>
-      <th>Size</th>
-      <th>Weight (kg)</th>
-      <th>Pickup Location</th>
-      <th>Delivery Location</th>
-      <th *ngIf="isCheck">Actions</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let ticket of (isCheck ? ticketsLists : suggestedTicketsLists)">
-      <td>{{ ticket.ticketType }}</td>
-      <td>{{ ticket.productName }}</td>
-      <td>{{ ticket.productSize }}</td>
-      <td>{{ ticket.productWeight }}</td>
-      <td>{{ ticket.pickupLocation.city }}, {{ ticket.pickupLocation.state }}, {{ ticket.pickupLocation.country }}</td>
-      <td>{{ ticket.deliveryLocation.city }}, {{ ticket.deliveryLocation.state }}, {{ ticket.deliveryLocation.country }}</td>
-      <td>
-        <button *ngIf="isCheck" (click)="openPopup(ticket.id)">Find</button>
-        <!-- Chat System Will be done in future -->
-        <!--<button *ngIf="!isCheck" (click)="startChat(ticket.id)">Chat</button> -->
-      </td>
-      <td *ngIf="!isCheck">
-        <button (click)="requestContactInformation(ticket.id)">Request Contact Details</button>
-      </td>
-    </tr>
-    </tbody>
-  </table>
+  <div class="table-container">
+    <table class="ticket-table" border="1">
+      <thead>
+      <tr>
+        <th>Ticket Type</th>
+        <th>Product Name</th>
+        <th>Size</th>
+        <th>Weight (kg)</th>
+        <th>Pickup Location</th>
+        <th>Delivery Location</th>
+        <th *ngIf="isCheck">Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let ticket of (isCheck ? ticketsLists : suggestedTicketsLists)">
+        <td>{{ ticket.ticketType }}</td>
+        <td>{{ ticket.productName }}</td>
+        <td>{{ ticket.productSize }}</td>
+        <td>{{ ticket.productWeight }}</td>
+        <td>{{ ticket.pickupLocation.city }}, {{ ticket.pickupLocation.state }}, {{ ticket.pickupLocation.country }}</td>
+        <td>{{ ticket.deliveryLocation.city }}, {{ ticket.deliveryLocation.state }}, {{ ticket.deliveryLocation.country }}</td>
+        <td *ngIf="isCheck">
+          <button class="action-btn" (click)="openPopup(ticket.id)">Find</button>
+        </td>
+        <td *ngIf="!isCheck">
+          <button class="action-btn" (click)="requestContactInformation(ticket.id)">Request Contact Details</button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
 
   <p *ngIf="!ticketsLists.length && isCheck" class="empty-state">No tickets available</p>
   <p *ngIf="!suggestedTicketsLists.length && !isCheck" class="empty-state">No suggested tickets available</p>
@@ -59,10 +70,14 @@
   <div class="popup-modal" *ngIf="isPopupOpen">
     <div class="popup-content">
       <h3>Enter Radius Details</h3>
-      <label for="pickupRadius">Pickup Location Radius (Mile):</label>
-      <input type="number" id="pickupRadius" [(ngModel)]="pickupRadius" />
-      <label for="deliveryRadius">Delivery Location Radius (Mile):</label>
-      <input type="number" id="deliveryRadius" [(ngModel)]="deliveryRadius" />
+      <div class="form-group">
+        <label for="pickupRadius">Pickup Location Radius (Mile)</label>
+        <input type="number" id="pickupRadius" [(ngModel)]="pickupRadius" />
+      </div>
+      <div class="form-group">
+        <label for="deliveryRadius">Delivery Location Radius (Mile)</label>
+        <input type="number" id="deliveryRadius" [(ngModel)]="deliveryRadius" />
+      </div>
       <div class="popup-actions">
         <button (click)="sendRadius()">Send</button>
         <button (click)="closePopup()">Cancel</button>
