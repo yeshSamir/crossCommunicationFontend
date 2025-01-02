@@ -130,7 +130,7 @@ export class DashboardComponent implements OnInit {
   requestContactInformation(ticketId: number | undefined): void {
     console.log(`Starting Requesting Contact Details for ticket ID: ${ticketId}`);
     console.log('Name: Samir Nepal, mobile:5096015874"');
-      this.ticketService.requestContactDetailsFromSuggestedListId(ticketId).subscribe({
+      this.ticketService.requestContactDetailsFromSuggestedListId(ticketId?.toString()).subscribe({
         next: (res) => {
           if (res.status) {
            this.contactDetailsModel = res

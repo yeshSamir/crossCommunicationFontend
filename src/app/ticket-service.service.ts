@@ -32,9 +32,10 @@ export class TicketService {
     return this.http.post<TicketResponse>(`${this.ticketBaseUrl}/fetchTicketsById`, fetchTicketsRequestModule);
   }
 
-  requestContactDetailsFromSuggestedListId(suggestedTicketId: number | undefined): Observable<ContactDetailsModel> {
-    return this.http.post<ContactDetailsModel>(`${this.ticketBaseUrl}/requestContactDetailsFromSuggestedListId`, {
-      params: { suggestedTicketId }
-    });
+  requestContactDetailsFromSuggestedListId(suggestedTicketId: string | undefined): Observable<ContactDetailsModel> {
+    console.log(typeof suggestedTicketId);
+    return this.http.post<ContactDetailsModel>(`${this.ticketBaseUrl}/requestContactDetailsFromSuggestedListId`,
+      { "suggestedTicketId": suggestedTicketId }
+    );
   }
 }
