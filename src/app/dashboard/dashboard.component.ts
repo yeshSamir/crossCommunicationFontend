@@ -35,6 +35,7 @@ export class DashboardComponent implements OnInit {
   pickupRadius: number = 0; // User input for pickup radius
   deliveryRadius: number = 0; // User input for delivery radius
   selectedTicketId: number | undefined; // Store selected ticket ID
+  isNotificationIsAccept: boolean = false;
 
   constructor(private ticketService: TicketService, public dialog: MatDialog) {
   }
@@ -128,14 +129,15 @@ export class DashboardComponent implements OnInit {
   }
 
   requestContactInformation(ticketId: number | undefined): void {
-    console.log(`Starting Requesting Contact Details for ticket ID: ${ticketId}`);
-    console.log('Name: Samir Nepal, mobile:5096015874"');
       this.ticketService.requestContactDetailsFromSuggestedListId(ticketId?.toString()).subscribe({
         next: (res) => {
           if (res.status) {
            this.contactDetailsModel = res
-            console.log(this.contactDetailsModel)
-            alert(res.responseMessage)
+            if (res?.name && res?.phoneNumber) {
+              this.isNotificationIsAccept = true;
+            }else{
+              alert(res.responseMessage);
+            }
           }
         },
         error: (err) => {
@@ -143,6 +145,10 @@ export class DashboardComponent implements OnInit {
           alert('Failed to Requesting Contact. Please try again.');
         },
       });
-
   }
+
+  closeIsNotificationIsAccept() {
+    this.isNotificationIsAccept = false;
+  }
+
 }

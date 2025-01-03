@@ -15,6 +15,7 @@ export interface TicketModel {
   deliveryLocation: LocationModel;
   notes?: string;
   securityPin: string;
+  notificationStatus: string;
 }
 
 export interface LocationModel {
