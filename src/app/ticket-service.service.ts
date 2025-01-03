@@ -6,13 +6,15 @@ import {ResponseModel} from "../model/response.model";
 import {FetchTicketsRequestModule} from "../model/fetchSuggestedTicketsRequestModule.module";
 import {LocationResponse} from "../model/location.module";
 import {ContactDetailsModel} from "../model/contactDetails.model";
+import {environment} from "../environments/environment";
 
 
 @Injectable({
   providedIn: 'root',
 })
 export class TicketService {
-  private ticketBaseUrl = 'http://localhost:8082/ticket'; // Your backend URL
+
+  private ticketBaseUrl = environment.ticketBaseUrl;
 
   constructor(private http: HttpClient) {}
 

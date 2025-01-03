@@ -2,14 +2,15 @@ import { Injectable } from '@angular/core';
 import {Observable} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {LocationResponse} from "../model/location.module";
+import {environment} from "../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class LocationService {
+  private locationBaseUrl = environment.locationBaseUrl;
 
-  private locationBaseUrl = 'http://localhost:8082/location'; // Your backend URL
-
+// Your backend URL
   constructor(private http: HttpClient) {}
 
   getCountries(): Observable<LocationResponse> {

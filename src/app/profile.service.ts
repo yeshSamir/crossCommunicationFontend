@@ -6,13 +6,15 @@ import {ResponseModel} from "../model/response.model";
 import {OtpDetails} from "../model/otp-details.model";
 import {LoginDetails} from "../model/login-details.module";
 import {LoginResponseModel} from "../model/loginResponse.module";
+import {environment} from "../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProfileService {
-  private profileBaseUrl = 'http://localhost:8082/profile'; // Replace with your backend URL
-  private autBaseUrl = 'http://localhost:8082/auth'; // Replace with your backend URL
+
+  private profileBaseUrl = environment.profileBaseUrl;
+  private autBaseUrl = environment.autBaseUrl;
 
   constructor(private http: HttpClient) {}
 
